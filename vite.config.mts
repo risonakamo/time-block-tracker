@@ -38,6 +38,7 @@ export default defineConfig({
         rollupOptions:{
             input:{
                 index:`${__dirname}/web/html/index.html`,
+                "component test":`${__dirname}/web/html/component-test/index.html`,
             }
         }
     }
