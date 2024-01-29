@@ -29,11 +29,6 @@ export default defineConfig({
     //     }
     // },
 
-    server:{
-        port:4000,
-        hmr:false
-    },
-
     build:{
         outDir:`${__dirname}/build`,
         target:["esnext"],
