@@ -2,15 +2,23 @@
   "name": "time-block-tracker",
   "version": "1.0.0",
   "type": "module",
+  "scripts": {
+    "cosmos": "cosmos",
+    "build": "vite build -w false",
+    "watch":"vite build -w true"
+  },
   "dependencies": {
     "@types/react": "^18.2.48",
     "@types/react-dom": "^18.2.18",
     "@vitejs/plugin-react": "^4.2.1",
     "less": "^4.2.0",
     "react": "^18.2.0",
+    "react-cosmos": "^6.0.2",
+    "react-cosmos-plugin-vite": "^6.0.1",
     "react-dom": "^18.2.0",
     "typescript": "^5.3.3",
     "vite": "^5.0.12",
-    "vite-plugin-checker": "^0.6.2"
+    "vite-plugin-checker": "^0.6.2",
+    "vite-tsconfig-paths": "^4.3.1"
   }
 }

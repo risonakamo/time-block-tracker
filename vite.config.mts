@@ -1,6 +1,7 @@
 import {defineConfig} from "vite";
 import react from "@vitejs/plugin-react";
 import checker from "vite-plugin-checker";
+import tsconfigPaths from "vite-tsconfig-paths";
 
 declare const __dirname:string;
 
@@ -12,20 +13,21 @@ export default defineConfig({
         react(),
         checker({
             typescript:true
-        })
+        }),
+        tsconfigPaths()
     ],
 
-    resolve:{
-        alias:{
-            components:`${__dirname}/web/components`,
-            lib:`${__dirname}/web/lib`,
-            css:`${__dirname}/web/css`,
-            apis:`${__dirname}/web/apis`,
-            hooks:`${__dirname}/web/hooks`,
-            store:`${__dirname}/web/store`,
-            assets:`${__dirname}/web/assets`
-        }
-    },
+    // resolve:{
+    //     alias:{
+    //         components:`${__dirname}/web/components`,
+    //         lib:`${__dirname}/web/lib`,
+    //         css:`${__dirname}/web/css`,
+    //         apis:`${__dirname}/web/apis`,
+    //         hooks:`${__dirname}/web/hooks`,
+    //         store:`${__dirname}/web/store`,
+    //         assets:`${__dirname}/web/assets`
+    //     }
+    // },
 
     server:{
         port:4000,
@@ -39,7 +41,7 @@ export default defineConfig({
 
         rollupOptions:{
             input:{
-                // index:`${__dirname}/web/html/index.html`,
+                index:`${__dirname}/web/html/index.html`,
             }
         }
     }
