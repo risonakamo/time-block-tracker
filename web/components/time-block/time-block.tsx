@@ -1,3 +1,5 @@
+import {TimeRow} from "components/time-row/time-row";
+
 import "./time-block.less";
 
 interface TimeBlockProps
@@ -23,15 +25,8 @@ export function TimeBlock(props:TimeBlockProps):JSX.Element
     </div>
 
     <div className="time-rows">
-      <div className="time-row">
-        <div className="times">
-          <div className="time-entry">01/24 01:22</div>
-          <div className="time-entry">01/24 01:35</div>
-        </div>
-        <div className="duration">
-          <h2>00:22</h2>
-        </div>
-      </div>
+      <TimeRow startTime="01/24 01:22" endTime="01/24 01:35" duration="00:22"/>
+      <TimeRow startTime="01/24 01:59" endTime="01/24 02:45" duration="00:56"/>
     </div>
   </div>;
 }

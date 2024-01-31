@@ -1,0 +1,3 @@
+- [ ] hovering over time row time fields should show a longer date including the year. so might need to change the input to time row to dates instead of strings?
+- [ ] time row should change colours when it is ongoing
+- [ ] time row could have special icon or something in the time field while it is ongoing. maybe a clock icon?
