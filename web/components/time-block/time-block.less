@@ -1,0 +1,86 @@
+h1
+{
+    font-weight: 400;
+    margin: 0;
+}
+
+h2
+{
+    font-weight: 400;
+    margin: 0;
+}
+
+.time-block
+{
+    width: 320px;
+
+    .title
+    {
+        margin-bottom: 8px;
+
+        h1
+        {
+            font-size: 25px;
+        }
+    }
+
+    .time-display
+    {
+        display: flex;
+        margin-bottom: 12px;
+
+        .timer
+        {
+            flex: 1;
+
+            span
+            {
+                font-size: 12px;
+                display: block;
+                height: 10px;
+            }
+
+            h2
+            {
+                font-size: 28px;
+            }
+        }
+
+        .button-zone
+        {
+            flex: 2;
+            padding-top: 4px;
+
+            .timer-button
+            {
+                font-size: 23px;
+                width: 150px;
+                padding: 3px 0 5px;
+                background: green;
+                text-align: center;
+                border-radius: 5px;
+            }
+        }
+    }
+
+    .time-rows
+    {
+        .time-row
+        {
+            display: flex;
+            border: 1px solid;
+            width: 70%;
+            box-sizing: border-box;
+
+            .times
+            {
+                flex: 1;
+            }
+
+            .duration
+            {
+                width: 90px;
+            }
+        }
+    }
+}
