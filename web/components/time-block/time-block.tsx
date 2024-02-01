@@ -1,17 +1,33 @@
+import {clsx} from "clsx";
+
 import {TimeRow} from "components/time-row/time-row";
 
 import "./time-block.less";
 
 interface TimeBlockProps
 {
-
+  running:boolean
 }
 
 export function TimeBlock(props:TimeBlockProps):JSX.Element
 {
+  var buttonText:string="start";
+
+  if (props.running)
+  {
+    buttonText="stop";
+  }
+
+  const buttonClx:string=clsx(
+    "timer-button",
+    {
+      "running":props.running
+    }
+  );
+
   return <div className="time-block">
     <div className="title">
-      <h1>1/sk</h1>
+      <textarea>1/sk</textarea>
     </div>
 
     <div className="time-display">
@@ -20,7 +36,7 @@ export function TimeBlock(props:TimeBlockProps):JSX.Element
         <h2>00:12</h2>
       </div>
       <div className="button-zone">
-        <div className="timer-button">start</div>
+        <div className={buttonClx}>{buttonText}</div>
       </div>
     </div>
 

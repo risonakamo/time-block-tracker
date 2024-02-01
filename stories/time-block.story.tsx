@@ -8,11 +8,17 @@ const meta:Meta<typeof TimeBlock>={
   title:"time block",
   component:TimeBlock,
   args:{
-
+    running:false
   }
 };
 export default meta;
 
 export const normal:Story={
 
+};
+
+export const running:Story={
+  args:{
+    running:true
+  }
 };
