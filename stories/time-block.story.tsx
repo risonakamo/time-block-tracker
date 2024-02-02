@@ -8,7 +8,20 @@ const meta:Meta<typeof TimeBlock>={
   title:"time block",
   component:TimeBlock,
   args:{
-    running:false
+    title:"1/sk",
+    running:false,
+    timerows:[
+      {
+        startTime:"01/24 01:22",
+        endTime:"01/24 01:35",
+        duration:"00:22"
+      },
+      {
+        startTime:"01/24 01:59",
+        endTime:"01/24 02:45",
+        duration:"00:56"
+      }
+    ]
   }
 };
 export default meta;
@@ -20,5 +33,50 @@ export const normal:Story={
 export const running:Story={
   args:{
     running:true
+  }
+};
+
+export const noRows:Story={
+  args:{
+    timerows:[
+
+    ]
+  }
+};
+
+export const manyRows:Story={
+  args:{
+    timerows:[
+      {
+        startTime:"01/24 01:22",
+        endTime:"01/24 01:35",
+        duration:"00:22"
+      },
+      {
+        startTime:"01/24 01:59",
+        endTime:"01/24 02:45",
+        duration:"00:56"
+      },
+      {
+        startTime:"01/24 01:22",
+        endTime:"01/24 01:35",
+        duration:"00:22"
+      },
+      {
+        startTime:"01/24 01:59",
+        endTime:"01/24 02:45",
+        duration:"00:56"
+      },
+      {
+        startTime:"01/24 01:22",
+        endTime:"01/24 01:35",
+        duration:"00:22"
+      },
+      {
+        startTime:"01/24 01:59",
+        endTime:"01/24 02:45",
+        duration:"00:56"
+      },
+    ]
   }
 };
