@@ -17,18 +17,6 @@ export default defineConfig({
         tsconfigPaths()
     ],
 
-    // resolve:{
-    //     alias:{
-    //         components:`${__dirname}/web/components`,
-    //         lib:`${__dirname}/web/lib`,
-    //         css:`${__dirname}/web/css`,
-    //         apis:`${__dirname}/web/apis`,
-    //         hooks:`${__dirname}/web/hooks`,
-    //         store:`${__dirname}/web/store`,
-    //         assets:`${__dirname}/web/assets`
-    //     }
-    // },
-
     build:{
         outDir:`${__dirname}/build`,
         target:["esnext"],
@@ -38,7 +26,6 @@ export default defineConfig({
         rollupOptions:{
             input:{
                 index:`${__dirname}/web/html/index.html`,
-                "component test":`${__dirname}/web/html/component-test/index.html`,
             }
         }
     }

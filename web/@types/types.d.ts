@@ -3,6 +3,7 @@ type DateTime=import("luxon").DateTime
 /** data representing a time block */
 interface TimeBlockData
 {
+    id:string
     title:string
     timerows:TimeRowData[]
 
@@ -13,7 +14,10 @@ interface TimeBlockData
 /** data that goes into time row */
 interface TimeRowData
 {
+    id:string
+
     startTime:DateTime
     endTime?:DateTime
+
     duration?:number // minutes
 }
