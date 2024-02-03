@@ -1,5 +1,6 @@
 import {clsx} from "clsx";
 import _ from "lodash";
+import {ChangeEvent} from "react";
 
 import {TimeRow} from "components/time-row/time-row";
 
@@ -11,16 +12,38 @@ interface TimeBlockProps
   totalTime:string
   running:boolean
   timerows:TimeRowData[]
+
+  // returns new state of timer
+  onTimerButtonClick(running:boolean):void
+
+  // user changing title. provides new title
+  onTitleChange(title:string):void
 }
 
 export function TimeBlock(props:TimeBlockProps):JSX.Element
 {
+  /** clicked timer button. returns opposite of current timer running state */
+  function h_timerButtonClick():void
+  {
+    props.onTimerButtonClick(!props.running);
+  }
+
+  /** user trying to change title */
+  function h_titleChange(e:ChangeEvent<HTMLTextAreaElement>):void
+  {
+    props.onTitleChange(e.target.value);
+  }
+
+
+
+
+  // --- render ---
   /** render time rows */
-  function r_timerows():JSX.Element[]
+  function r_timerows():JSX.Element[]|JSX.Element
   {
     if (!props.timerows.length)
     {
-      return [<h2>no time rows</h2>];
+      return <h2>no time rows</h2>;
     }
 
     return _.map(props.timerows,(timerow:TimeRowData,i:number):JSX.Element=>{
@@ -58,7 +81,7 @@ export function TimeBlock(props:TimeBlockProps):JSX.Element
 
   return <div className={topcx}>
     <div className="title">
-      <textarea>{props.title}</textarea>
+      <textarea value={props.title} onChange={h_titleChange}></textarea>
     </div>
 
     <div className="time-display">
@@ -67,7 +90,9 @@ export function TimeBlock(props:TimeBlockProps):JSX.Element
         <h2 className={timerSpanCx}>{props.totalTime}</h2>
       </div>
       <div className="button-zone">
-        <div className={buttonClx}>{buttonText}</div>
+        <div className={buttonClx} onClick={h_timerButtonClick}>
+          {buttonText}
+        </div>
       </div>
     </div>
 
