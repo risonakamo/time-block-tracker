@@ -1,3 +1,8 @@
+# actions
+- [ ] design initial components
+- [ ] start laying out page
+- [ ] plan out steps for making page operational
+
 # time block
 - [x] scrollable time rows
 - [x] running version of time row

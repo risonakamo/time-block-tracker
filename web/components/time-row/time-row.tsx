@@ -10,6 +10,9 @@ interface TimeRowProps
   duration?:string
 
   running:boolean
+
+  // user pressed delete button
+  onDelete():void
 }
 
 export function TimeRow(props:TimeRowProps):JSX.Element
@@ -41,7 +44,7 @@ export function TimeRow(props:TimeRowProps):JSX.Element
         {durationItem}
       </div>
     </div>
-    <div className="close">
+    <div className="close" onClick={props.onDelete}>
       x
     </div>
   </div>;
