@@ -60,6 +60,12 @@ h2
             h2
             {
                 font-size: 28px;
+
+                &.running
+                {
+                    color: green;
+                    opacity: .2;
+                }
             }
         }
 
@@ -87,9 +93,25 @@ h2
 
     .time-rows
     {
-        .time-row
-        {
+        height: 210px;
+        overflow-y: auto;
 
+        &.no-rows
+        {
+            align-items: center;
+            display: flex;
+            justify-content: center;
+
+            h2
+            {
+                font-size: 17px;
+                opacity: .5;
+            }
         }
+    }
+
+    &.running
+    {
+        border-color: green;
     }
 }

@@ -3,5 +3,5 @@ interface TimeRowData
 {
     startTime:string
     endTime?:string
-    duration:string
+    duration?:string
 }

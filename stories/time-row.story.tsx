@@ -10,7 +10,8 @@ const meta:Meta<typeof TimeRow>={
   args:{
     startTime:"01/24 01:22",
     endTime:"01/24 01:35",
-    duration:"00:22"
+    duration:"00:22",
+    running:false
   }
 };
 export default meta;
@@ -24,5 +25,13 @@ export const noEndTime:Story={
     startTime:"01/24 01:59",
     endTime:undefined,
     duration:undefined,
+  }
+};
+
+export const running:Story={
+  args:{
+    running:true,
+    duration:undefined,
+    endTime:undefined
   }
 };

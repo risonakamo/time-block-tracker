@@ -10,6 +10,7 @@ const meta:Meta<typeof TimeBlock>={
   args:{
     title:"1/sk",
     running:false,
+    totalTime:"00:12",
     timerows:[
       {
         startTime:"01/24 01:22",
@@ -32,7 +33,17 @@ export const normal:Story={
 
 export const running:Story={
   args:{
-    running:true
+    running:true,
+    timerows:[
+      {
+        startTime:"01/24 01:22"
+      },
+      {
+        startTime:"01/24 01:59",
+        endTime:"01/24 02:45",
+        duration:"00:56"
+      },
+    ]
   }
 };
 

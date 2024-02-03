@@ -1,9 +1,9 @@
 # time block
-- [ ] scrollable time rows
-- [ ] running version of time row
+- [x] scrollable time rows
+- [x] running version of time row
     - time row could have special icon or something in the time field while it is ongoing. maybe a clock icon?
-- [ ] running version of whole time block
-- [ ] special styling when it is empty of time rows
+- [x] running version of whole time block
+- [x] special styling when it is empty of time rows
 - [x] stop button version of time block
 
 # time row

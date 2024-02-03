@@ -6,7 +6,7 @@
     .row-block
     {
         display: flex;
-        border: 1px solid;
+        border: 1px solid black;
         box-sizing: border-box;
         padding: 7px 6px;
         flex: 1;
@@ -14,6 +14,12 @@
         .times
         {
             flex: 1;
+
+            .time-entry.running
+            {
+                color: green;
+                opacity: .5;
+            }
         }
 
         .duration
@@ -21,6 +27,18 @@
             width: 90px;
             display: flex;
             align-items: center;
+            justify-content: center;
+
+            .clock-icon
+            {
+                height: 24px;
+                width: 24px;
+            }
+        }
+
+        &.running
+        {
+            border-color: green;
         }
     }
 
