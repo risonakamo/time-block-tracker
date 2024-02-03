@@ -1,5 +1,5 @@
 # actions
-- [ ] design initial components
+- [x] design initial components
 - [ ] start laying out page
 - [ ] plan out steps for making page operational
 
