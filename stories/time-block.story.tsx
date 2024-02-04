@@ -62,45 +62,63 @@ export const running:Story={
 
 export const noRows:Story={
   args:{
-    timerows:[
+    timedata:{
+      title:"1/sk",
+      id:"123",
+      totalTime:56,
+      running:true,
+      timerows:[
 
-    ]
+      ]
+    }
   }
 };
 
 export const manyRows:Story={
   args:{
-    timerows:[
-      {
-        startTime:"01/24 01:22",
-        endTime:"01/24 01:35",
-        duration:"00:22"
-      },
-      {
-        startTime:"01/24 01:59",
-        endTime:"01/24 02:45",
-        duration:"00:56"
-      },
-      {
-        startTime:"01/24 01:22",
-        endTime:"01/24 01:35",
-        duration:"00:22"
-      },
-      {
-        startTime:"01/24 01:59",
-        endTime:"01/24 02:45",
-        duration:"00:56"
-      },
-      {
-        startTime:"01/24 01:22",
-        endTime:"01/24 01:35",
-        duration:"00:22"
-      },
-      {
-        startTime:"01/24 01:59",
-        endTime:"01/24 02:45",
-        duration:"00:56"
-      },
-    ]
+    timedata:{
+      title:"1/sk",
+      id:"123",
+      totalTime:56,
+      running:true,
+      timerows:[
+        {
+          id:"ads",
+          startTime:customTimeParse("01/24 01:22"),
+          endTime:customTimeParse("01/24 01:35"),
+          duration:22
+        },
+        {
+          id:"ads",
+          startTime:customTimeParse("01/24 01:59"),
+          endTime:customTimeParse("01/24 02:45"),
+          duration:56
+        },
+        {
+          id:"ads",
+          startTime:customTimeParse("01/24 01:22"),
+          endTime:customTimeParse("01/24 01:35"),
+          duration:22
+        },
+        {
+          id:"ads",
+          startTime:customTimeParse("01/24 01:59"),
+          endTime:customTimeParse("01/24 02:45"),
+          duration:56
+        },
+        {
+          id:"ads",
+          startTime:customTimeParse("01/24 01:22"),
+          endTime:customTimeParse("01/24 01:35"),
+          duration:22
+        },
+        {
+          id:"ads",
+          startTime:customTimeParse("01/24 01:59"),
+          endTime:customTimeParse("01/24 02:45"),
+          duration:56
+        },
+      ]
+    }
   }
 };

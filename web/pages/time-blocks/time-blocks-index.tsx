@@ -3,6 +3,7 @@ import {DateTime} from "luxon";
 import {atom,useAtom} from "jotai";
 import {atomWithImmer} from "jotai-immer";
 import _ from "lodash";
+import {Plus} from "@phosphor-icons/react";
 
 import {TimeBlock} from "components/time-block/time-block";
 
@@ -105,7 +106,9 @@ function TimeBlocksIndex():JSX.Element
 
   return <>
     <div className="menu-bar">
-
+      <div className="add-button">
+        <Plus className="add-icon"/>
+      </div>
     </div>
     <div className="time-blocks">
       {r_timeblocks()}

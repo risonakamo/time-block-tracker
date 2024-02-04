@@ -3,6 +3,7 @@ import _ from "lodash";
 import {ChangeEvent} from "react";
 
 import {TimeRow} from "components/time-row/time-row";
+import { formatDuration } from "lib/time";
 
 import "./time-block.less";
 
@@ -87,7 +88,7 @@ export function TimeBlock(props:TimeBlockProps):JSX.Element
     <div className="time-display">
       <div className="timer">
         <span>total time</span>
-        <h2 className={timerSpanCx}>{props.timedata.totalTime}</h2>
+        <h2 className={timerSpanCx}>{formatDuration(props.timedata.totalTime)}</h2>
       </div>
       <div className="button-zone">
         <div className={buttonClx} onClick={h_timerButtonClick}>

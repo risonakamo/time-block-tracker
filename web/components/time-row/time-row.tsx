@@ -27,7 +27,7 @@ export function TimeRow(props:TimeRowProps):JSX.Element
 
   // --- render ---
   // render duration field as text or icon based on running state
-  var durationItem:JSX.Element=<h2>"--:--"</h2>;
+  var durationItem:JSX.Element=<h2>--:--</h2>;
 
   if (props.running)
   {

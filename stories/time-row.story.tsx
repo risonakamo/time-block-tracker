@@ -1,6 +1,7 @@
 import type {Meta,StoryObj} from "@storybook/react";
 
 import {TimeRow} from "components/time-row/time-row";
+import { customTimeParse } from "lib/time";
 
 type Story=StoryObj<typeof TimeRow>;
 
@@ -8,9 +9,12 @@ const meta:Meta<typeof TimeRow>={
   title:"time row",
   component:TimeRow,
   args:{
-    startTime:"01/24 01:22",
-    endTime:"01/24 01:35",
-    duration:"00:22",
+    timerowData:{
+      id:"ad",
+      startTime:customTimeParse("01/24 01:22"),
+      endTime:customTimeParse("01/24 01:35"),
+      duration:22,
+    },
     running:false
   }
 };
@@ -22,16 +26,23 @@ export const normal:Story={
 
 export const noEndTime:Story={
   args:{
-    startTime:"01/24 01:59",
-    endTime:undefined,
-    duration:undefined,
+    timerowData:{
+      id:"asd",
+      startTime:customTimeParse("01/24 01:59"),
+      endTime:undefined,
+      duration:undefined,
+    }
   }
 };
 
 export const running:Story={
   args:{
     running:true,
-    duration:undefined,
-    endTime:undefined
+    timerowData:{
+      id:"asd",
+      startTime:customTimeParse("01/24 01:59"),
+      endTime:undefined,
+      duration:undefined,
+    }
   }
 };
