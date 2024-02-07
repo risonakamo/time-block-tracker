@@ -1,5 +1,7 @@
 type DateTime=import("luxon").DateTime
 
+type TimeBlocks=Record<string,TimeBlockData>
+
 /** data representing a time block */
 interface TimeBlockData
 {

@@ -4,8 +4,11 @@ import {atom,useAtom} from "jotai";
 import {atomWithImmer} from "jotai-immer";
 import _ from "lodash";
 import {Plus} from "@phosphor-icons/react";
+import { useEffect } from "react";
 
 import {TimeBlock} from "components/time-block/time-block";
+
+import { getTimeblocks } from "apis/time-block-api";
 
 import "./time-blocks-index.less";
 
@@ -71,6 +74,13 @@ function TimeBlocksIndex():JSX.Element
   const [timeDatas,setTimeDatas]=useAtom<TimeBlockData[]>(timeDataAtom);
 
 
+
+
+  useEffect(()=>{
+    (async ()=>{
+      console.log(await getTimeblocks());
+    })();
+  },[]);
 
 
   // --- handlers ---
