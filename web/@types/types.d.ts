@@ -1,5 +1,10 @@
 type DateTime=import("luxon").DateTime
 
+/** timeblocks dict
+    key: timeblock id
+    val: the timeblock */
+type TimeBlocks=Record<string,TimeBlockData>
+
 /** data representing a time block */
 interface TimeBlockData
 {
