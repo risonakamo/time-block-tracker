@@ -5,6 +5,8 @@ import {atomWithImmer} from "jotai-immer";
 import _ from "lodash";
 import {Plus} from "@phosphor-icons/react";
 import { useEffect } from "react";
+import {QueryClient,QueryClientProvider,useQuery} from "@tanstack/react-query";
+import {atomWithQuery} from "jotai-tanstack-query";
 
 import {TimeBlock} from "components/time-block/time-block";
 
@@ -12,68 +14,78 @@ import { getTimeblocks } from "apis/time-block-api";
 
 import "./time-blocks-index.less";
 
-const TIME_DATA:TimeBlockData[]=[
-  {
-    title:"1/sk",
-    id:"asdasd",
-    timerows:[
-      {
-        id:"asdasd",
-        startTime:DateTime.fromFormat("01/20 21:58","MM/dd HH:mm"),
-        endTime:DateTime.fromFormat("01/20 22:10","MM/dd HH:mm"),
-        duration:11
-      },
-      {
-        id:"asdasd",
-        startTime:DateTime.fromFormat("01/20 22:20","MM/dd HH:mm"),
-        endTime:DateTime.fromFormat("01/20 22:22","MM/dd HH:mm"),
-        duration:2
-      },
-      {
-        id:"asdasd",
-        startTime:DateTime.fromFormat("01/20 22:34","MM/dd HH:mm"),
-        endTime:DateTime.fromFormat("01/20 22:38","MM/dd HH:mm"),
-        duration:3
-      }
-    ],
-    totalTime:35,
-    running:false
-  },
-  {
-    title:"1/sk2",
-    id:"asdasd",
-    timerows:[
-      {
-        id:"asdasd",
-        startTime:DateTime.fromFormat("01/27 19:36","MM/dd HH:mm"),
-        endTime:DateTime.fromFormat("01/27 20:00","MM/dd HH:mm"),
-        duration:24
-      },
-      {
-        id:"asdasd",
-        startTime:DateTime.fromFormat("01/27 20:04","MM/dd HH:mm"),
-        endTime:DateTime.fromFormat("01/27 20:18","MM/dd HH:mm"),
-        duration:14
-      },
-      {
-        id:"asdasd",
-        startTime:DateTime.fromFormat("01/27 20:36","MM/dd HH:mm"),
-        endTime:DateTime.fromFormat("01/27 20:48","MM/dd HH:mm"),
-        duration:11
-      }
-    ],
-    totalTime:56,
-    running:false
-  }
-];
+// const TIME_DATA:TimeBlockData[]=[
+//   {
+//     title:"1/sk",
+//     id:"asdasd",
+//     timerows:[
+//       {
+//         id:"asdasd",
+//         startTime:DateTime.fromFormat("01/20 21:58","MM/dd HH:mm"),
+//         endTime:DateTime.fromFormat("01/20 22:10","MM/dd HH:mm"),
+//         duration:11
+//       },
+//       {
+//         id:"asdasd",
+//         startTime:DateTime.fromFormat("01/20 22:20","MM/dd HH:mm"),
+//         endTime:DateTime.fromFormat("01/20 22:22","MM/dd HH:mm"),
+//         duration:2
+//       },
+//       {
+//         id:"asdasd",
+//         startTime:DateTime.fromFormat("01/20 22:34","MM/dd HH:mm"),
+//         endTime:DateTime.fromFormat("01/20 22:38","MM/dd HH:mm"),
+//         duration:3
+//       }
+//     ],
+//     totalTime:35,
+//     running:false
+//   },
+//   {
+//     title:"1/sk2",
+//     id:"asdasd",
+//     timerows:[
+//       {
+//         id:"asdasd",
+//         startTime:DateTime.fromFormat("01/27 19:36","MM/dd HH:mm"),
+//         endTime:DateTime.fromFormat("01/27 20:00","MM/dd HH:mm"),
+//         duration:24
+//       },
+//       {
+//         id:"asdasd",
+//         startTime:DateTime.fromFormat("01/27 20:04","MM/dd HH:mm"),
+//         endTime:DateTime.fromFormat("01/27 20:18","MM/dd HH:mm"),
+//         duration:14
+//       },
+//       {
+//         id:"asdasd",
+//         startTime:DateTime.fromFormat("01/27 20:36","MM/dd HH:mm"),
+//         endTime:DateTime.fromFormat("01/27 20:48","MM/dd HH:mm"),
+//         duration:11
+//       }
+//     ],
+//     totalTime:56,
+//     running:false
+//   }
+// ];
 
-const timeDataAtom=atomWithImmer<TimeBlockData[]>(TIME_DATA);
+const qyClient:QueryClient=new QueryClient();
+
+const timeblocksDataQyAtom=atomWithQuery<TimeBlocks>(()=>{
+  return {
+    queryKey:["timeblocks"],
+    initialData:{},
+
+    queryFn():Promise<TimeBlocks>
+    {
+      return getTimeblocks();
+    }
+  };
+});
 
 function TimeBlocksIndex():JSX.Element
 {
-  const [timeDatas,setTimeDatas]=useAtom<TimeBlockData[]>(timeDataAtom);
-
-
+  const [timeblocksQy]=useAtom(timeblocksDataQyAtom);
 
   // --- handlers ---
 
@@ -84,7 +96,7 @@ function TimeBlocksIndex():JSX.Element
   /** render the time blocks */
   function r_timeblocks():JSX.Element[]
   {
-    return _.map(timeDatas,(timedata:TimeBlockData,i:number):JSX.Element=>{
+    return _.map(_.values(timeblocksQy.data),(timedata:TimeBlockData,i:number):JSX.Element=>{
       // all time blocks need their own handlers
       function h_titleChange(newtitle:string):void
       {
@@ -120,7 +132,11 @@ function TimeBlocksIndex():JSX.Element
 
 function main()
 {
-  createRoot(document.querySelector(".main")!).render(<TimeBlocksIndex/>);
+  createRoot(document.querySelector(".main")!).render(
+    <QueryClientProvider client={qyClient}>
+      <TimeBlocksIndex/>
+    </QueryClientProvider>
+  );
 }
 
 window.onload=main;
