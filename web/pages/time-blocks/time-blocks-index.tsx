@@ -79,13 +79,14 @@ const timeblocksDataQyAtom=atomWithQuery<TimeBlocks>(()=>{
     queryFn():Promise<TimeBlocks>
     {
       return getTimeblocks();
-    }
+    },
   };
 });
 
 function TimeBlocksIndex():JSX.Element
 {
   const [timeblocksQy]=useAtom(timeblocksDataQyAtom);
+  console.log(timeblocksQy.data);
 
   // --- handlers ---
 

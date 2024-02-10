@@ -5,7 +5,8 @@ type DateTime=import("luxon").DateTime
     val: the timeblock */
 type TimeBlocks=Record<string,TimeBlockData>
 
-/** data representing a time block */
+/** data representing a time block
+ *  server: TimeBlock2 struct */
 interface TimeBlockData
 {
     id:string
@@ -16,13 +17,17 @@ interface TimeBlockData
     running:boolean
 }
 
-/** data that goes into time row */
+/** data that goes into time row
+ *  server: TimeRow struct */
 interface TimeRowData
 {
     id:string
 
     startTime:DateTime
     endTime?:DateTime
+
+    startTimeRaw:string
+    endTimeRaw?:string
 
     duration?:number // minutes
 }

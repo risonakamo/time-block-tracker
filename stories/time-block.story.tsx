@@ -19,13 +19,15 @@ const meta:Meta<typeof TimeBlock>={
           id:"123",
           startTime:customTimeParse("01/24 01:22"),
           endTime:customTimeParse("01/24 01:35"),
-          duration:22
+          duration:22,
+          startTimeRaw:"",
         },
         {
           id:"123",
           startTime:customTimeParse("01/24 01:59"),
           endTime:customTimeParse("01/24 02:45"),
-          duration:56
+          duration:56,
+          startTimeRaw:"",
         }
       ]
     }
@@ -48,12 +50,14 @@ export const running:Story={
         {
           id:"123",
           startTime:customTimeParse("01/24 01:22"),
+          startTimeRaw:"",
         },
         {
           id:"123",
           startTime:customTimeParse("01/24 01:59"),
           endTime:customTimeParse("01/24 02:45"),
-          duration:56
+          duration:56,
+          startTimeRaw:"",
         },
       ]
     }
@@ -86,37 +90,43 @@ export const manyRows:Story={
           id:"ads",
           startTime:customTimeParse("01/24 01:22"),
           endTime:customTimeParse("01/24 01:35"),
-          duration:22
+          duration:22,
+          startTimeRaw:"",
         },
         {
           id:"ads",
           startTime:customTimeParse("01/24 01:59"),
           endTime:customTimeParse("01/24 02:45"),
-          duration:56
+          duration:56,
+          startTimeRaw:"",
         },
         {
           id:"ads",
           startTime:customTimeParse("01/24 01:22"),
           endTime:customTimeParse("01/24 01:35"),
-          duration:22
+          duration:22,
+          startTimeRaw:"",
         },
         {
           id:"ads",
           startTime:customTimeParse("01/24 01:59"),
           endTime:customTimeParse("01/24 02:45"),
-          duration:56
+          duration:56,
+          startTimeRaw:"",
         },
         {
           id:"ads",
           startTime:customTimeParse("01/24 01:22"),
           endTime:customTimeParse("01/24 01:35"),
-          duration:22
+          duration:22,
+          startTimeRaw:"",
         },
         {
           id:"ads",
           startTime:customTimeParse("01/24 01:59"),
           endTime:customTimeParse("01/24 02:45"),
-          duration:56
+          duration:56,
+          startTimeRaw:"",
         },
       ]
     }

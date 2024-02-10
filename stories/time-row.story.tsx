@@ -13,6 +13,7 @@ const meta:Meta<typeof TimeRow>={
       id:"ad",
       startTime:customTimeParse("01/24 01:22"),
       endTime:customTimeParse("01/24 01:35"),
+      startTimeRaw:"",
       duration:22,
     },
     running:false
@@ -31,6 +32,7 @@ export const noEndTime:Story={
       startTime:customTimeParse("01/24 01:59"),
       endTime:undefined,
       duration:undefined,
+      startTimeRaw:"",
     }
   }
 };
@@ -42,6 +44,7 @@ export const running:Story={
       id:"asd",
       startTime:customTimeParse("01/24 01:59"),
       endTime:undefined,
+      startTimeRaw:"",
       duration:undefined,
     }
   }

@@ -1,3 +1,7 @@
+import _ from "lodash";
+
+import { repairTimeBlock } from "lib/timeblock";
+
 /** get all time blocks */
 export async function getTimeblocks():Promise<TimeBlocks>
 {
@@ -10,7 +14,9 @@ export async function getTimeblocks():Promise<TimeBlocks>
         throw "failed";
     }
 
-    return res.json();
+    var timeblocks:TimeBlocks=await res.json();
+
+    return _.mapValues(timeblocks,repairTimeBlock);
 }
 
 /** request to create new timeblock */
