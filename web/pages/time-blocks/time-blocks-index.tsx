@@ -75,14 +75,6 @@ function TimeBlocksIndex():JSX.Element
 
 
 
-
-  useEffect(()=>{
-    (async ()=>{
-      console.log(await getTimeblocks());
-    })();
-  },[]);
-
-
   // --- handlers ---
 
 
