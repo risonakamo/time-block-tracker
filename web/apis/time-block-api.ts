@@ -1,49 +1,38 @@
-import _ from "lodash";
+import axios from "axios";
 
-import { repairTimeBlock } from "lib/timeblock";
+const ax=axios.create({
+    baseURL:"http://localhost:4201"
+});
 
-/** get all time blocks */
-export async function getTimeblocks():Promise<TimeBlocks>
+/** get timeblocks */
+export async function getTimeblocks():Promise<TimeblockDict_api>
 {
-    const res:Response=await fetch("http://localhost:4201/time-blocks",{
-        method:"GET"
-    });
-
-    if (res.status!=200)
-    {
-        throw "failed";
-    }
-
-    var timeblocks:TimeBlocks=await res.json();
-
-    return _.mapValues(timeblocks,repairTimeBlock);
+    return (await ax.get("/get-timeblocks")).data;
 }
 
-/** request to create new timeblock */
+/** change a timeblock title */
+export async function setTimeblockTitle(blockId:string,newTitle:string):Promise<void>
+{
+    const data:TitleChangeRequest_api={
+        blockId,
+        newTitle,
+    };
+
+    return (await ax.post("/set-title",data,{
+        responseType:"text"
+    })).data;
+}
+
 export async function newTimeblock():Promise<void>
 {
-    const res:Response=await fetch("http://localhost:4201/new-time-block",{
-        method:"POST"
-    });
-
-    if (res.status!=200)
-    {
-        throw "failed";
-    }
+    return (await ax.post("/new-timeblock",null,{
+        responseType:"text"
+    })).data;
 }
 
-/** toggle a time block */
-export async function toggleTimeblock(id:string):Promise<void>
+export async function toggleTimeblock(blockId:string):Promise<void>
 {
-    const res:Response=await fetch(
-        `http://localhost:4201/toggle-time-block/${id}`,
-        {
-            method:"POST"
-        }
-    );
-
-    if (res.status!=200)
-    {
-        throw "failed";
-    }
+    return (await ax.post(`/toggle-timeblock/${blockId}`,null,{
+        responseType:"text",
+    })).data;
 }
