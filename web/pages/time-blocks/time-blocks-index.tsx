@@ -7,10 +7,12 @@ import {Plus} from "@phosphor-icons/react";
 import { useEffect } from "react";
 import {QueryClient,QueryClientProvider,useQuery} from "@tanstack/react-query";
 import {atomWithQuery} from "jotai-tanstack-query";
+import { useMutation } from "@tanstack/react-query";
 
 import {TimeBlock} from "components/time-block/time-block";
 
-import { getTimeblocks } from "apis/time-block-api";
+import { getTimeblocks,newTimeblock,toggleTimeblock } from "apis/time-block-api";
+import { apiTimeblockConvert } from "lib/api_convert";
 
 import "./time-blocks-index.less";
 
@@ -21,21 +23,58 @@ const timeblocksDataQyAtom=atomWithQuery<TimeBlocks>(()=>{
   return {
     queryKey:["timeblocks"],
     initialData:{},
+
+    async queryFn():Promise<TimeBlocks>
+    {
+      return apiTimeblockConvert(await getTimeblocks());
+    }
   };
 });
 
 function TimeBlocksIndex():JSX.Element
 {
   const [timeblocksQy]=useAtom(timeblocksDataQyAtom);
-  console.log(timeblocksQy.data);
 
 
-  useEffect(()=>{
-    (async ()=>{
-      console.log("?");
-      console.log("what",await getTimeblocks());
-    })();
-  },[]);
+
+  // --- mut funcs ---
+  const createTimeblockMqy=useMutation({
+    mutationKey:["create-timeblock"],
+
+    async mutationFn():Promise<string>
+    {
+      return newTimeblock();
+    },
+
+    onSuccess(data:string):void
+    {
+      console.log("create succeeded with msg:",data);
+      timeblocksQy.refetch();
+    }
+  });
+
+  const toggleTimeblockMqy=useMutation({
+    mutationKey:["start-timeblock"],
+
+    async mutationFn(id:string):Promise<string>
+    {
+      return toggleTimeblock(id);
+    },
+
+    onSuccess():void
+    {
+      timeblocksQy.refetch();
+    }
+  });
+
+
+
+  // --- handlers ---
+  /** add timeblock button. call timeblock create mut */
+  function h_addClick():void
+  {
+    createTimeblockMqy.mutate();
+  }
 
 
 
@@ -50,9 +89,10 @@ function TimeBlocksIndex():JSX.Element
 
       }
 
+      /** clicked timer start button. trigger timeblock toggle */
       function h_timerStartChange(running:boolean):void
       {
-
+        toggleTimeblockMqy.mutate(timedata.id);
       }
 
       function h_timeRowDelete(timerow:TimeRowData):void
@@ -68,7 +108,7 @@ function TimeBlocksIndex():JSX.Element
   return <>
     <div className="menu-bar">
       <div className="add-button">
-        <Plus className="add-icon"/>
+        <Plus className="add-icon" onClick={h_addClick}/>
       </div>
     </div>
     <div className="time-blocks">

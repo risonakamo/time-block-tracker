@@ -26,8 +26,5 @@ interface TimeRowData
     startTime:DateTime
     endTime?:DateTime
 
-    startTimeRaw:string
-    endTimeRaw?:string
-
     duration?:number // minutes
 }

@@ -11,7 +11,7 @@ export async function getTimeblocks():Promise<TimeblockDict_api>
 }
 
 /** change a timeblock title */
-export async function setTimeblockTitle(blockId:string,newTitle:string):Promise<void>
+export async function setTimeblockTitle(blockId:string,newTitle:string):Promise<string>
 {
     const data:TitleChangeRequest_api={
         blockId,
@@ -23,14 +23,16 @@ export async function setTimeblockTitle(blockId:string,newTitle:string):Promise<
     })).data;
 }
 
-export async function newTimeblock():Promise<void>
+/** create new timeblock */
+export async function newTimeblock():Promise<string>
 {
     return (await ax.post("/new-timeblock",null,{
         responseType:"text"
     })).data;
 }
 
-export async function toggleTimeblock(blockId:string):Promise<void>
+/** toggle timeblock's state */
+export async function toggleTimeblock(blockId:string):Promise<string>
 {
     return (await ax.post(`/toggle-timeblock/${blockId}`,null,{
         responseType:"text",
