@@ -2,6 +2,7 @@ import {defineConfig} from "vite";
 import react from "@vitejs/plugin-react";
 import checker from "vite-plugin-checker";
 import tsconfigPaths from "vite-tsconfig-paths";
+import {LogLevel,RollupLog,LogHandler} from "rollup";
 
 declare const __dirname:string;
 
@@ -26,6 +27,16 @@ export default defineConfig({
         rollupOptions:{
             input:{
                 index:`${__dirname}/web/html/index.html`,
+            },
+
+            onLog(level:LogLevel,log:RollupLog,handler:LogHandler):void
+            {
+                if (log.message.includes("Error when using sourcemap for reporting"))
+                {
+                    return;
+                }
+
+                handler(level,log);
             }
         }
     }

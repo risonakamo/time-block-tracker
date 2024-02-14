@@ -5,9 +5,11 @@ const ax=axios.create({
 });
 
 /** get timeblocks */
-export async function getTimeblocks():Promise<TimeblockDict_api>
+export async function getTimeblocks(abortSignal:AbortSignal):Promise<TimeblockDict_api>
 {
-    return (await ax.get("/get-timeblocks")).data;
+    return (await ax.get("/get-timeblocks",{
+        signal:abortSignal
+    })).data;
 }
 
 /** change a timeblock title */

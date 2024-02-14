@@ -1,17 +1,14 @@
 import {createRoot} from "react-dom/client";
-import {DateTime} from "luxon";
-import {atom,useAtom} from "jotai";
-import {atomWithImmer} from "jotai-immer";
 import _ from "lodash";
 import {Plus} from "@phosphor-icons/react";
-import { useEffect } from "react";
-import {QueryClient,QueryClientProvider,useQuery} from "@tanstack/react-query";
-import {atomWithQuery} from "jotai-tanstack-query";
-import { useMutation } from "@tanstack/react-query";
+import {QueryClient,QueryClientProvider,useQuery,useQueryClient,
+  useMutation} from "@tanstack/react-query";
+import { Provider } from "jotai";
 
 import {TimeBlock} from "components/time-block/time-block";
 
-import { getTimeblocks,newTimeblock,toggleTimeblock,setTimeblockTitle } from "apis/time-block-api";
+import { getTimeblocks,newTimeblock,toggleTimeblock,
+  setTimeblockTitle } from "apis/time-block-api";
 import { apiTimeblockConvert } from "lib/api_convert";
 
 import "./time-blocks-index.less";
@@ -19,22 +16,18 @@ import "./time-blocks-index.less";
 
 const qyClient:QueryClient=new QueryClient();
 
-const timeblocksDataQyAtom=atomWithQuery<TimeBlocks>(()=>{
-  return {
+function TimeBlocksIndex():JSX.Element
+{
+  // --- querys ---
+  const timeblocksQy=useQuery({
     queryKey:["timeblocks"],
     initialData:{},
 
-    async queryFn():Promise<TimeBlocks>
+    async queryFn({signal}):Promise<TimeBlocks>
     {
-      return apiTimeblockConvert(await getTimeblocks());
+      return apiTimeblockConvert(await getTimeblocks(signal));
     }
-  };
-});
-
-function TimeBlocksIndex():JSX.Element
-{
-  const [timeblocksQy]=useAtom(timeblocksDataQyAtom);
-
+  });
 
 
   // --- mut funcs ---
@@ -81,31 +74,22 @@ function TimeBlocksIndex():JSX.Element
 
     async mutationFn(args:SetTitleMqyArgs):Promise<string>
     {
-      console.log("what");
-      // await qyClient.cancelQueries({
-      //   queryKey:["timeblocks"]
-      // });
+      await qyClient.cancelQueries({
+        queryKey:["timeblocks"]
+      });
 
       qyClient.setQueryData<TimeBlocks>(["timeblocks"],(prev:TimeBlocks|undefined):TimeBlocks=>{
         var clone:TimeBlocks={};
-        console.log("prev",prev);
 
-        console.log("in");
         if (prev)
         {
-          console.log("hello?");
           clone=_.cloneDeep(prev);
         }
 
-        console.log("how");
-        console.log(clone);
         clone[args.blockId].title=args.newTitle;
-        console.log("new clone",clone);
 
         return clone;
       });
-
-      console.log("?");
 
       return setTimeblockTitle(args.blockId,args.newTitle);
     },
@@ -173,7 +157,9 @@ function main()
 {
   createRoot(document.querySelector(".main")!).render(
     <QueryClientProvider client={qyClient}>
-      <TimeBlocksIndex/>
+      <Provider>
+        <TimeBlocksIndex/>
+      </Provider>
     </QueryClientProvider>
   );
 }
